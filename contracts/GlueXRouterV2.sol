@@ -1,9 +1,8 @@
 // SPDX-License-Identifier: GPL-2.0-or-later
 pragma solidity ^0.8.0;
 
-
-import {EthReciever} from "./"
-import {Router} from "./libraries/RouterStructs.sol";
+import {EthReceiver} from "./utils/EthReceiver.sol";
+import {Interaction} from "./base/RouterStructs.sol";
 import {IExecutor} from "./interfaces/IExecutor.sol";
 import {IERC20} from "./interfaces/IERC20.sol";
 import {SafeERC20} from "./lib/SafeERC20.sol";

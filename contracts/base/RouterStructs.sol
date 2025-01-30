@@ -6,4 +6,3 @@ struct Interaction {
     uint256 value;
     bytes callData;
 }
-export Interaction;
