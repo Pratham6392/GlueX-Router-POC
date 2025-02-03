@@ -1,11 +1,12 @@
 // SPDX-License-Identifier: GPL-2.0-or-later
-pragma solidity ^0.8.0;
+pragma solidity ^0.8.9;
+
 
 import "./EthReceiver.sol";
-import {Interaction} from "./base/RouterStructs.sol";
-import {IExecutor} from "./interfaces/IExecutor.sol";
-import {IERC20} from "./interfaces/IERC20.sol";
-import {SafeERC20} from "./lib/SafeERC20.sol";
+import {Interaction} from "./RouterStructs.sol";
+import {IERC20} from './IERC20.sol';
+import {IExecutor} from './IExecuter.sol';
+import {SafeERC20} from './SafeERC20.sol';
 
 contract GlueXRouter is EthReceiver {
     using SafeERC20 for IERC20;
@@ -46,8 +47,7 @@ contract GlueXRouter is EthReceiver {
     constructor(address _feeCollector, address _WETH) {
         feeCollector = _feeCollector;
         WETH = _WETH;
-    }
-
+    }  
     function executeRoute(
         IExecutor executor,
         RouteParams calldata params,
@@ -63,15 +63,14 @@ contract GlueXRouter is EthReceiver {
             params.inputToken.safeTransferFrom(
                 msg.sender,
                 address(this),
-                params.inputAmount,
-                params.permitData
+                params.inputAmount
             );
         }
-
         // Execute interactions
-        uint256 balanceBefore = params.outputToken.safeBalanceOf(address(this));
-        executor.execute{value: msg.value}(interactions);
-        uint256 balanceAfter = params.outputToken.safeBalanceOf(address(this));
+        IERC20 outputToken = params.outputToken;
+        uint256 balanceBefore = outputToken.balanceOf(address(this));
+       executor.executeRoute{value: msg.value}(interactions, outputToken);
+        uint256 balanceAfter = outputToken.balanceOf(address(this));
 
         // Calculate output
         uint256 outputAmount = balanceAfter - balanceBefore;
