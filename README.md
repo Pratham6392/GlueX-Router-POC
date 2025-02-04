@@ -43,15 +43,11 @@ npx hardhat test
 
 
 ## Key test coverage
--Token swap execution paths
-
--Fee calculation accuracy
-
--Security vulnerability checks
-
--Edge case handling (zero amounts, max values)
-
--Reentrancy attack simulations
+- Token swap execution paths
+- Fee calculation accuracy
+- Security vulnerability checks
+- Edge case handling (zero amounts, max values)
+- Reentrancy attack simulations
 
 
 
