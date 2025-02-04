@@ -52,8 +52,11 @@ npx hardhat test
 
 
 
+## My test case 
+  Here the test was passing , I made a dummyToken for this case , if you want to run the dummyToken.sol code 
+  then just change paths: /test/mocks in Hardhat.congig.js file , and you will be good to go.
 
-
+![Screenshot 2025-02-04 080048](https://github.com/user-attachments/assets/9aa61665-3e29-4314-aeb9-a67cbff0e8a8)
 
 
 
