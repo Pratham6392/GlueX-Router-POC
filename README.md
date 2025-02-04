@@ -18,11 +18,14 @@ GlueX Router is a decentralized exchange (DEX) aggregator router contract that e
 - **Concentrated Liquidity**: Optimized capital efficiency for liquidity providers
 - **Dynamic Fee Tiering**: Support for multiple fee tiers (0.01% - 1%)
 
+
 ### 🔒 Security Architecture
 - **Reentrancy Protection**: Built-in guard against reentrancy attacks
 - **Input Validation**: Strict parameter checks with custom errors
 - **Fee Limitation**: Maximum 0.5% protocol fee cap
 - **Emergency Withdrawals**: Treasury-controlled asset recovery
+
+  
 
 ## 📦 Installation
 
@@ -30,10 +33,22 @@ GlueX Router is a decentralized exchange (DEX) aggregator router contract that e
 git clone https://github.com/yourusername/gluex-router-poc.git
 cd gluex-router-poc
 npm install
+```
 
-##Testing
 
+## Testing
 ```bash
+npx hardhat test
+```
+
+
+
+
+
+
+
+
+
 
 
 
