@@ -30,3 +30,10 @@ GlueX Router is a decentralized exchange (DEX) aggregator router contract that e
 git clone https://github.com/yourusername/gluex-router-poc.git
 cd gluex-router-poc
 npm install
+
+##Testing
+
+```bash
+
+
+
