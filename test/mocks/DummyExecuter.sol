@@ -1,23 +1,31 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-// You might have an interface IExecutor in your project; here we provide a minimal dummy version.
-// Adjust the parameters and function name as needed.
-interface IExecutor {
-    function executeRoute(
-        // Assuming Interaction is defined elsewhere;
-        // for a dummy, you can use a placeholder type (or comment this out if not used)
-        // For example: Interaction[] calldata interactions,
-        // and an IERC20 outputToken parameter.
-        // For simplicity, we leave the parameters empty if not needed.
-        // If you need a dummy implementation, add the parameters accordingly.
-        uint256 dummyParam
-    ) external payable;
-}
+import {Interaction} from "../../contracts/RouterStructs.sol";
+import {IERC20} from "../../contracts/IERC20.sol";
+import {IExecutor} from "../../contracts/IExecuter.sol";
+
 
 contract DummyExecutor is IExecutor {
-    // A dummy implementation that does nothing.
-    function executeRoute(uint256 dummyParam) external payable override {
-        // Simply do nothing (or add minimal logging if needed).
+    function executeRoute(
+        Interaction[] calldata interactions,
+        IERC20 
+    ) external payable override {
+       
+        for (uint256 i = 0; i < interactions.length; i++) {
+            Interaction calldata inter = interactions[i]; 
+            (bool success, bytes memory result) = inter.target.call{value: inter.value}(inter.callData);
+            require(success, _getRevertMsg(result));
+        }
+    }
+
+   
+    function _getRevertMsg(bytes memory _returnData) internal pure returns (string memory) {
+        if (_returnData.length < 68) return "Transaction reverted silently";
+        assembly {
+          
+            _returnData := add(_returnData, 0x04)
+        }
+        return abi.decode(_returnData, (string));
     }
 }
